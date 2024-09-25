@@ -11,9 +11,27 @@ config_version=5
 [application]
 
 config/name="Godot-Learning-Project"
+run/main_scene="res://Test1/test1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=450
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/net.yarvis.pixel_pen/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="地面"
+2d_physics/layer_2="墙壁"
+2d_physics/layer_3="装饰"
+2d_physics/layer_4="角色"
+2d_physics/layer_5="投射物"
