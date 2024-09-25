@@ -12,8 +12,24 @@ config_version=5
 
 config/name="Godot-Learning-Project"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://art/dabian.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=450
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/net.yarvis.pixel_pen/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="地面"
+2d_physics/layer_2="墙壁"
+2d_physics/layer_3="装饰"
+2d_physics/layer_4="角色"
