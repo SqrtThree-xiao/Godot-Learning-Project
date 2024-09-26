@@ -86,6 +86,7 @@ pivot_offset = Vector2(32, 32)
 script = ExtResource("1_lonf3")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0.566425, 0.391796, 0.422143, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
