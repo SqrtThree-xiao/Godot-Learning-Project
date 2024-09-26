@@ -39,59 +39,80 @@ func random_create_cell(count:int = 1):
 
 func merge_cell(keycode:int):
 	var merge_map = {}
-	var k = null
+	var dir = null
 	var add = null
 	match(keycode):
 		KEY_UP:
-			k = "x"
-			add = -1
+			dir = "x"
+			add = 1
 		KEY_DOWN:
-			k = "x"
-			add = 1
-		KEY_RIGHT:
-			k = "y"
-			add = 1
-		KEY_LEFT:
-			k = "y"
+			dir = "x"
 			add = -1
+		KEY_RIGHT:
+			dir = "y"
+			add = -1
+		KEY_LEFT:
+			dir = "y"
+			add = 1
 		_:
 			return
 	
-	for key in map.keys():
-		var cell = map[key]
-		if not merge_map.has(cell.grid_pos[k]):
-			merge_map[cell.grid_pos[k]] = []
-		var list = merge_map.get(cell.grid_pos[k])
-		list.insert(list.bsearch_custom(cell, func(a, b):
-			if add > 0: 
-				return a.grid_pos[k] > b.grid_pos[k]
-			else:
-				return a.grid_pos[k] < b.grid_pos[k]
-			, true), cell)
-	
+	merge_map = select_and_sort(dir, add, merge_map)
 	
 	for i in merge_map:
-		var list = merge_map[i]
+		var array = merge_map[i]
 		var new_array = []
-		for ii in range(list.size(), 0, -1):
-			var cell = list[ii - 1]
-			if new_array.size() == 0:
-				new_array.append(cell)
-			else:
-				if new_array[-1].number == list[ii - 1].number:
-					new_array[-1].number += list[ii - 1].number
-					var idx = cell.get_instance_id()
-					map.erase(idx)
-					cell.free()
-				else:
-					new_array.append(cell)
-		for ii in range(new_array.size()):
-			var new_pos = Vector2i.ZERO
-			if k == "x" :
-				new_pos.x = new_array[ii].grid_pos.x
+
+		if add > 0 :
+			for ii in range(array.size(), 0, -1):
+				var cell = array[ii - 1]
+				new_array = add_new_array(new_array, cell)
+		else:
+			for ii in range(array.size()):
+				var cell = array[ii]
+				add_new_array(new_array, cell)
+		update_cell_data(new_array, dir, add)
+
+func add_new_array(new_array, cell):
+	if new_array.size() == 0:
+		new_array.append(cell)
+	else:
+		if new_array[-1].number == cell.number:
+			new_array[-1].number += cell.number
+			var idx = cell.get_instance_id()
+			map.erase(idx)
+			cell.free()
+		else:
+			new_array.append(cell)
+	return new_array
+
+func update_cell_data(new_array, dir, add):
+	for ii in range(new_array.size()):
+		var new_pos = Vector2i.ZERO
+		if dir == "x" :
+			new_pos.x = new_array[ii].grid_pos.x
+			if add > 0 :
 				new_pos.y = ii
 			else:
-				new_pos.y = new_array[ii].grid_pos.y
+				new_pos.y = 4 - ii
+		else:
+			new_pos.y = new_array[ii].grid_pos.y
+			if add > 0 :
 				new_pos.x = ii
-			new_array[ii].refresh_view(new_pos, new_array[ii].number)
-	
+			else:
+				new_pos.x = 4 - ii
+		new_array[ii].refresh_view(new_pos, new_array[ii].number)
+
+func select_and_sort(dir, add, merge_map):
+	for key in map.keys():
+		var cell = map[key]
+		if not merge_map.has(cell.grid_pos[dir]):
+			merge_map[cell.grid_pos[dir]] = []
+		var list = merge_map.get(cell.grid_pos[dir])
+		list.insert(list.bsearch_custom(cell, func(a, b):
+			if add > 0: 
+				return a.grid_pos[dir] > b.grid_pos[dir]
+			else:
+				return a.grid_pos[dir] < b.grid_pos[dir]
+			, true), cell)
+	return merge_map
