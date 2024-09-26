@@ -22,6 +22,8 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=800
 window/size/viewport_height=450
+window/size/window_width_override=1600
+window/size/window_height_override=900
 window/stretch/mode="viewport"
 
 [editor_plugins]
@@ -35,3 +37,7 @@ enabled=PackedStringArray("res://addons/net.yarvis.pixel_pen/plugin.cfg")
 2d_physics/layer_3="装饰"
 2d_physics/layer_4="角色"
 2d_physics/layer_5="投射物"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
