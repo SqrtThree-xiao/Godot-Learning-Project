@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://shxuq4w2bjpw"]
+
+[ext_resource type="Script" path="res://MainLauncher.gd" id="1_0je7y"]
+
+[node name="MainLauncher" type="Node"]
+script = ExtResource("1_0je7y")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="2048Game" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "2048"
+
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

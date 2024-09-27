@@ -1,8 +1,11 @@
 extends Control
 
 @onready var panel: Panel = $Panel
-const CELL = preload("res://G2048/cell.tscn")
+@onready var label: Label = $Panel/Label
+const CELL = preload("res://G2048/2048Cell.tscn")
 const max_count: int = 5 * 5
+const hight = 5
+const width = 5
 const next_create_count: int = 2
 var cell_dict = {}
 
@@ -11,6 +14,8 @@ enum E_DIR
 	up, down, right, left
 }
 var cur_dir = E_DIR.up
+var integral = 0
+var max_number = 0
 
 func instantiate_cell(x, y):
 	var cell = CELL.instantiate()
@@ -20,7 +25,11 @@ func instantiate_cell(x, y):
 
 func _ready() -> void:
 	random_create_cell(3)
+	refresh_view()
 
+func refresh_view():
+	label.text = "当前分数:{0}，最大值：{1}".format([integral, max_number])
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		merge_cell(event.keycode)
@@ -34,14 +43,16 @@ func is_empty(x: int, y: int) -> bool:
 
 func random_create_cell(count: int = 1):
 	var array = []
-	for number in range(max_count):
-		var x: int = number % 5
-		var y: int = number / 5
-		if is_empty(x, y):
-			array.append([x, y])
-	if array.size() >= count:
+	for x in range(width):
+		for y in range (hight):
+			if is_empty(x, y):
+				array.append([x, y])
+
+	var is_lose = array.size() == 0
+	if not is_lose:
 		array.shuffle()
-		for i in range(count):
+		var time = count if count <= array.size() else array.size()
+		for i in range(time):
 			var data = array[i]
 			instantiate_cell(data[0], data[1])
 	else:
@@ -86,6 +97,9 @@ func add_new_array(new_array, cell):
 	else:
 		if new_array[-1].number == cell.number:
 			new_array[-1].number += cell.number
+			integral += cell.number
+			max_number = max_number if max_number > new_array[-1].number else new_array[-1].number
+			refresh_view()
 			var idx = cell.get_instance_id()
 			cell_dict.erase(idx)
 			cell.disappear(new_array[-1].position)
@@ -111,20 +125,30 @@ func update_cell_data(new_array):
 		new_array[ii].refresh_view(new_pos, new_array[ii].number)
 
 func select_and_sort():
-	var condition = cur_dir == E_DIR.left or cur_dir == E_DIR.right
-	var k = "y" if condition else "x"
 	var merge_map = {}
 	for key in cell_dict.keys():
 		var cell = cell_dict[key]
-		if not merge_map.has(cell.grid_pos[k]):
-			merge_map[cell.grid_pos[k]] = []
-
-		var list = merge_map.get(cell.grid_pos[k])
-		
-		list.insert(list.bsearch_custom(cell, func(a, b):
-			if cur_dir == E_DIR.up or cur_dir == E_DIR.left:
-				return a.grid_pos[k] > b.grid_pos[k]
-			else:
-				return a.grid_pos[k] < b.grid_pos[k]
-			, true), cell)
+		if cur_dir == E_DIR.left or cur_dir == E_DIR.right:
+			if not merge_map.has(cell.grid_pos.y):
+				merge_map[cell.grid_pos.y] = []
+			var list = merge_map.get(cell.grid_pos.y)
+			list.append(cell)
+		else:
+			if not merge_map.has(cell.grid_pos.x):
+				merge_map[cell.grid_pos.x] = []
+			var list = merge_map.get(cell.grid_pos.x)
+			list.append(cell)
+	
+	for key in merge_map:
+		merge_map[key].sort_custom(sort_func)
 	return merge_map
+
+func sort_func(a, b):
+	if cur_dir == E_DIR.left:
+		return a.grid_pos.x < b.grid_pos.x
+	elif cur_dir == E_DIR.right:
+		return a.grid_pos.x > b.grid_pos.x
+	elif cur_dir == E_DIR.up:
+		return a.grid_pos.y < b.grid_pos.y
+	else:
+		return a.grid_pos.y > b.grid_pos.y

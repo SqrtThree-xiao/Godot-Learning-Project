@@ -4,6 +4,7 @@ extends Control
 @export var number: int = 2
 @onready var label: Label = $Label
 @onready var nine_patch_rect: NinePatchRect = $NinePatchRect
+@onready var control: Control = $"."
 
 var tween
 var color_dict = {
@@ -28,30 +29,27 @@ func _ready() -> void:
 	refresh_view(grid_pos, number)
 	appear()
 
-func refresh_view(new_grid_pos, new_number) -> void:
-	grid_pos = new_grid_pos
-	number = new_number
-
+func refresh_view(new_grid_pos, new_number):
 	label.text = String.num(number)
-	self.position = grid_pos * 64
+	grid_pos = new_grid_pos
+	position = grid_pos * 64
+	number = new_number
 	nine_patch_rect.modulate = color_dict[number]
-	#print(self.position, grid_pos * 64)
-	#move(grid_pos * 64)
 
 func appear():
 	if tween != null:
 		tween.kill()
 	scale = Vector2.ZERO
-	tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	tween = create_tween().set_ease(Tween.EaseType.EASE_OUT)
+	tween.tween_property(control, "scale", Vector2.ONE, 0.2)
 
 func disappear(pos):
 	if tween != null:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
+	tween.tween_property(control, "position", pos, 0.2)
 	tween.tween_callback(free)
 
 func move(pos):
 	tween = create_tween()
-	tween.tween_property(self, "position", pos, 0.2)
+	tween.tween_property(control, "position", pos, 0.2)

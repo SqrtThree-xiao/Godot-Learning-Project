@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot-Learning-Project"
-run/main_scene="res://Test1/test1.tscn"
+run/main_scene="res://code/main/MainLauncher.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -22,13 +22,11 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=800
 window/size/viewport_height=450
-window/size/window_width_override=1600
-window/size/window_height_override=900
 window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/net.yarvis.pixel_pen/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg", "res://addons/net.yarvis.pixel_pen/plugin.cfg")
 
 [layer_names]
 
