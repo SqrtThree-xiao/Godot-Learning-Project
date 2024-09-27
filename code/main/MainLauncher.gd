@@ -5,7 +5,8 @@ var UIRoot: Node
 func _ready() -> void:
 	init_ui_root()
 	open_menu()
-	
+	#UIManger.new().open("LAUNCH_MENU")
+
 func init_ui_root():
 	UIRoot = get_node("UIRoot")
 	for i in range(10):

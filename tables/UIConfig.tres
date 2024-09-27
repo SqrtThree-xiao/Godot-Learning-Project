@@ -1,8 +1,4 @@
 [gd_resource type="JSON" format=3 uid="uid://bv1mjbxpr0gql"]
 
 [resource]
-data = {
-"LaunchMenu": {
-"name": "LaunchMenu"
-}
-}
+data = {}
