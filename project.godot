@@ -11,12 +11,16 @@ config_version=5
 [application]
 
 config/name="Godot-Learning-Project"
-run/main_scene="res://code/main/MainLauncher.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
+
+[autoload]
+
+UIManger="*res://code/framework/UIManger.gd"
 
 [display]
 

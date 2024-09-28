@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://djxl50q73ubbm"]
+
+[ext_resource type="Script" path="res://code/main/launch_menu.gd" id="1_6y55m"]
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("btn2048", "quit")]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_right = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_6y55m")
+btn2048 = NodePath("G2048")
+quit = NodePath("Quit")
+
+[node name="G2048" type="Button" parent="."]
+layout_mode = 2
+text = "2048"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 2
+text = "退出"

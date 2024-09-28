@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://shxuq4w2bjpw"]
-
-[ext_resource type="Script" path="res://code/main/MainLauncher.gd" id="1_0je7y"]
-
-[node name="MainLauncher" type="Node"]
-script = ExtResource("1_0je7y")
-
-[node name="UIRoot" type="CanvasLayer" parent="."]

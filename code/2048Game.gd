@@ -1,18 +1,14 @@
-extends Control
-
+extends WindowBase
 @onready var panel: Panel = $Panel
 @onready var label: Label = $Panel/Label
-const CELL = preload("res://G2048/2048Cell.tscn")
+@onready var btn_quit: Button = $BtnQuit
+const CELL = preload("res://2048Cell.tscn")
 const max_count: int = 5 * 5
 const hight = 5
 const width = 5
 const next_create_count: int = 2
 var cell_dict = {}
-
-enum E_DIR
-{
-	up, down, right, left
-}
+enum E_DIR { up, down, right, left}
 var cur_dir = E_DIR.up
 var integral = 0
 var max_number = 0
@@ -24,8 +20,14 @@ func instantiate_cell(x, y):
 	cell_dict[cell.get_instance_id()] = cell
 
 func _ready() -> void:
+	btn_quit.pressed.connect(on_click_quit)
+	
 	random_create_cell(3)
 	refresh_view()
+
+func on_click_quit() -> void:
+	on_click_close()
+	UIManger.open_ui(Const.UI_NAME.LaunchMenu)
 
 func refresh_view():
 	label.text = "当前分数:{0}，最大值：{1}".format([integral, max_number])

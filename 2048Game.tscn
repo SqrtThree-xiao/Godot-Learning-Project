@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://g1rlqvsolwsx"]
 
-[ext_resource type="Script" path="res://G2048/2048Game.gd" id="1_mq0lo"]
-[ext_resource type="Theme" uid="uid://bsuqu64445rmf" path="res://addons/net.yarvis.pixel_pen/resources/default_theme.tres" id="1_smogc"]
+[ext_resource type="Script" path="res://code/2048Game.gd" id="1_4qrlc"]
+[ext_resource type="Theme" uid="uid://bsuqu64445rmf" path="res://addons/net.yarvis.pixel_pen/resources/default_theme.tres" id="2_6sskd"]
 
 [sub_resource type="FontFile" id="FontFile_4ur5b"]
 cache/0/14/0/ascent = 0.0
@@ -70,7 +70,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mq0lo")
+script = ExtResource("1_4qrlc")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -86,9 +86,10 @@ offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(160, 160)
-theme = ExtResource("1_smogc")
+theme = ExtResource("2_6sskd")
 
 [node name="Label" type="Label" parent="Panel"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_top = -49.0
 offset_right = 167.2
@@ -97,3 +98,11 @@ theme = SubResource("Theme_eelq0")
 theme_override_font_sizes/font_size = 16
 text = "当前分数："
 vertical_alignment = 1
+
+[node name="BtnQuit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 400.0
+offset_right = 440.0
+offset_bottom = 431.0
+text = "退出游戏"

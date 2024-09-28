@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://px33m4dw3f6l"]
 
 [ext_resource type="Texture2D" uid="uid://3s3q66pn2e0p" path="res://art/frame1.png" id="1_lgdmo"]
-[ext_resource type="Script" path="res://G2048/2048Cell.gd" id="1_lonf3"]
+[ext_resource type="Script" path="res://code/2048Cell.gd" id="1_lonf3"]
 
 [sub_resource type="FontFile" id="FontFile_7uqwx"]
 subpixel_positioning = 0
