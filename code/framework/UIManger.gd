@@ -2,14 +2,20 @@ extends Node
 
 const max_layer:int = 10
 var windows = {}
-var ui_config = preload("res://tables/UIConfig.tres").data
 
 func _ready() -> void:
 	init_ui_root()
 	open_ui(Const.UI_NAME.LaunchMenu)
-	
+
+func get_ui_config(key:String):
+	var file = FileAccess.open("res://tables/UIConfig.json", FileAccess.READ)
+	var file_content = file.get_as_text()
+	var json_parse_result = JSON.parse_string(file_content)
+	var config = json_parse_result[key]
+	return config
+
 func open_ui(id:int) -> void:
-	var config = ui_config[str(id)]
+	var config = get_ui_config(str(id))
 	var window = null
 	if windows.find_key(id):
 		window = windows.get(id)
