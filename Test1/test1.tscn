@@ -324,3 +324,6 @@ shape = SubResource("WorldBoundaryShape2D_0l2s0")
 
 [node name="角色" parent="." instance=ExtResource("2_swxt0")]
 position = Vector2(369, 271)
+
+[node name="角色2" parent="." instance=ExtResource("2_swxt0")]
+position = Vector2(239, 239)

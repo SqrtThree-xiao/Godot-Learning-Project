@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dl46ak5xg8tve"]
 
-[ext_resource type="Script" path="res://Test1/角色.gd" id="1_ulxmj"]
+[ext_resource type="Script" path="res://Test1/character.gd" id="1_0alhm"]
 [ext_resource type="Texture2D" uid="uid://bi6ankm60223" path="res://art/dabian.png" id="2_whyc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7d22h"]
@@ -10,7 +10,7 @@ size = Vector2(32, 32)
 position = Vector2(384, 256)
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_ulxmj")
+script = ExtResource("1_0alhm")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
