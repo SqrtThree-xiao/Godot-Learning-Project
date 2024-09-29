@@ -8,5 +8,10 @@
 		"layer": 4.0,
 		"name": "launch_menu",
 		"res": "res://launch_menu.tscn"
-	}
+	},
+	"3": {
+		"layer": 4.0,
+		"name": "nav",
+		"res": "res://world_sence.tscn"
+	},
 }

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx1aie1x70yle"]
+
+[ext_resource type="Script" path="res://code/ui_world_sence.gd" id="1_y5imx"]
+
+[node name="WorldSence" type="Control" node_paths=PackedStringArray("quit")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y5imx")
+quit = NodePath("Quit")
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -58.0
+offset_right = 112.0
+offset_bottom = -27.0
+grow_vertical = 0
+text = "返回到菜单"
